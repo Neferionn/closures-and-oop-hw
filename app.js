@@ -7,11 +7,6 @@
 // Then, create "HtmlSelectElement" with items(optional), addItem, removeItem members.
 // HtmlSelectElement needs to inherit "click" and "focus" methods.
 
-// function extend(childClass, parentClass) {
-//   childClass.prototype = Object.create(parentClass.prototype);
-//   childClass.prototype.constructor = childClass;
-// }
-
 function HtmlElement() {
   this.click = function () {
     console.log(`CLICK`);
@@ -29,12 +24,14 @@ e.focus();
 HtmlSelectElement.prototype = Object.create(HtmlElement.prototype);
 HtmlSelectElement.prototype.constructor = HtmlSelectElement;
 
-function HtmlSelectElement(items) {
+function HtmlSelectElement(items = []) {
   HtmlElement.call(this);
+
   this.items = items;
 
   this.showItems = function () {
-    return this.items;
+    if (!this.items) return (this.items = []);
+    else return this.items;
   };
 
   this.addItem = function (item) {
@@ -59,11 +56,19 @@ const selectElement = new HtmlSelectElement(arr);
 console.log(selectElement.showItems());
 
 selectElement.addItem("li");
+selectElement.addItem("aside");
 
 console.log(selectElement.showItems());
 console.log(selectElement.removeItem("main"));
 console.log(selectElement.removeItem("span"));
 console.log(selectElement.showItems());
+
+// testing with empty new instance
+
+const emptyElement = new HtmlSelectElement([]);
+console.log(emptyElement.showItems());
+emptyElement.addItem("customTag");
+console.log(emptyElement.showItems());
 
 selectElement.focus();
 selectElement.click();
