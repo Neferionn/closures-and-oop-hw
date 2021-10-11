@@ -8,20 +8,21 @@
 // HtmlSelectElement needs to inherit "click" and "focus" methods.
 
 class HtmlElement {
-  constructor() {}
-
   click() {
     console.log("CLICK");
   }
+}
+
+class ExtendedHtmlElement extends HtmlElement {
   focus() {
     console.log("FOCUS");
   }
 }
-const e = new HtmlElement();
+const e = new ExtendedHtmlElement();
 e.click();
 e.focus();
 
-class HtmlSelectElement extends HtmlElement {
+class HtmlSelectElement extends ExtendedHtmlElement {
   constructor(private items: string[] = []) {
     super();
   }
@@ -60,7 +61,7 @@ console.log(selectElement.showItems());
 selectElement.focus();
 selectElement.click();
 
-const emptyElement = new HtmlSelectElement([]);
+const emptyElement = new HtmlSelectElement();
 console.log(emptyElement.showItems());
 emptyElement.addItem("customTag");
 console.log(emptyElement.showItems());
