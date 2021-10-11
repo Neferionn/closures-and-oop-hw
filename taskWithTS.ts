@@ -22,14 +22,8 @@ e.click();
 e.focus();
 
 class HtmlSelectElement extends HtmlElement {
-  constructor(private items?: string[]) {
+  constructor(private items: string[] = []) {
     super();
-    if (!items) {
-      console.log(`array empty`);
-      this.items = [];
-    } else {
-      this.items = items;
-    }
   }
 
   showItems() {
@@ -37,13 +31,13 @@ class HtmlSelectElement extends HtmlElement {
   }
 
   addItem(item: string) {
-    this.items!.push(item);
+    this.items.push(item);
   }
 
   removeItem(item: string) {
-    if (this.items!.length && this.items!.includes(item)) {
-      let itemIndex: number = this.items!.indexOf(item);
-      if (itemIndex !== -1) this.items!.splice(itemIndex, 1);
+    if (this.items.length && this.items.includes(item)) {
+      let itemIndex: number = this.items.indexOf(item);
+      if (itemIndex !== -1) this.items.splice(itemIndex, 1);
     } else {
       throw new Error("Name of element not found");
     }
